@@ -24,7 +24,7 @@ function citysearch() {
     setTimeout(clear, 300);
     //Query for Current Weather Using API URL And Ajax 
     let firstQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
-        cityname + "&units=imperial&appid=e7c303b6206e1039548ab3f11d2207b3";
+        cityname + "&units=imperial&appid=2c0e9b4aa4e4384f5b28db3b17a36510";
     $.ajax({
         url: firstQueryURL,
         method: "GET"
@@ -49,7 +49,7 @@ function citysearch() {
         /* Query for One Call API - this will give us our info for 5 Day Forecast cards */
         let secondQueryURL =
             "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon +
-            "&exclude=hourly&units=imperial&appid=e7c303b6206e1039548ab3f11d2207b3";
+            "&exclude=hourly&units=imperial&appid=";
         $.ajax({
             url: secondQueryURL,
             method: "GET"
