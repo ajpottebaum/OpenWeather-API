@@ -1,9 +1,8 @@
-// current date
+//todays date
 let $cityDate = moment().format("llll");
 $("#currentdate").text($cityDate);
 
 /* City Search Functions */
-// click listener calls citysearch() and soon a function related to the .search-history sidebar
 let $clicked = $(".buttonsearch");
 $clicked.on("click", citysearch);
 $clicked.on("click", searchSave);
@@ -15,6 +14,7 @@ $("input").keyup(function () {
 })
 // Seachcityname function
 function citysearch() {
+
     // saved citer enter by USer in a let
     let cityname = (($(this).parent()).siblings("#cityenter")).val().toLowerCase();
     // empty search bar with setTimeout() so the City name is not gonna stuck on input section
@@ -22,9 +22,9 @@ function citysearch() {
         $("#cityenter").val("");
     }
     setTimeout(clear, 300);
-    //Query for Current Weather Using API URL And Ajax 
+    //current weather
     let firstQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
-        cityname + "&units=imperial&appid=2c0e9b4aa4e4384f5b28db3b17a36510";
+        cityname + "&units=imperial&appid=e7c303b6206e1039548ab3f11d2207b3";
     $.ajax({
         url: firstQueryURL,
         method: "GET"
@@ -49,7 +49,7 @@ function citysearch() {
         /* Query for One Call API - this will give us our info for 5 Day Forecast cards */
         let secondQueryURL =
             "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon +
-            "&exclude=hourly&units=imperial&appid=";
+            "&exclude=hourly&units=imperial&appid=e7c303b6206e1039548ab3f11d2207b3";
         $.ajax({
             url: secondQueryURL,
             method: "GET"
@@ -58,32 +58,14 @@ function citysearch() {
             let $uv = response.current.uvi;
             // var for displaying in html & grabbing the right color class
             let $uvIndex = $("#uv-index");
-            $uvIndex.text($uv);
-            $uvIndex.blur();
-            // if conditionals to add / remove btn classes, changing color
-            // originally one line like $uvIndex.addClass().removeClass() but just too long
-            if ($uv <= 2) {
-                $uvIndex.addClass("btn-success");
-                $uvIndex.removeClass("btn-warning btn-hazard btn-danger btn-climate-change");
-            }
-            else if ($uv <= 5) {
-                $uvIndex.addClass("btn-warning");
-                $uvIndex.removeClass("btn-success btn-hazard btn-danger btn-climate-change");
-            }
-            // .btn-hazard is a custom class, riffing on Bootsrap, see style.css
-            else if ($uv <= 7) {
-                $uvIndex.addClass("btn-hazard");
-                $uvIndex.removeClass("btn-success btn-warning btn-danger btn-climate-change");
-            }
-            else if ($uv <= 10.99) {
-                $uvIndex.addClass("btn-danger");
-                $uvIndex.removeClass("btn-success btn-warning btn-hazard btn-climate-change");
-            }
-            // .btn-climate-change, like .btn-hazard, is custom
-            // and it's funny because it is sad :(
-            else if ($uv >= 11) {
-                $uvIndex.addClass("btn-climate-change");
-                $uvIndex.removeClass("btn-success btn-warning btn-hazard btn-danger");
+            $uvIndex.text($uv)
+            if ($uv >= 0 && $uv <=3) {
+            document.getElementById("Risk1").innerHTML = ("  Low Risk")
+             }
+            else if ($uv >=3.1 && $uv <=7.0){
+                document.getElementById("Risk2").innerHTML = ("  Medium Risk")}
+            else if ($uv >= 7.1) {
+                document.getElementById("Risk3").interHTML = ("  High Risk" )
             }
             // Date Assignment - convert UNIX response to human readable
             // array to hold timestamps
@@ -114,15 +96,15 @@ function citysearch() {
             for (i = 0; i < highTemps.length; i++) {
                 $("#highday" + i).text("High: " + highTemps[i]);
             }
-            // same process for lows as with highs
-            let lowTemps = [];
-            for (i = 1; i < 6; i++) {
-                lowTemps[i] = parseInt(response.daily[i].temp.min) + "°F";
-            }
-            lowTemps = lowTemps.filter(item => item);
-            for (i = 0; i < lowTemps.length; i++) {
-                $("#lowday" + i).text("Low: " + lowTemps[i]);
-            }
+             // same process for lows as with highs
+             let lowTemps = [];
+             for (i = 1; i < 6; i++) {
+                 lowTemps[i] = parseInt(response.daily[i].temp.min) + "°F";
+             }
+             lowTemps = lowTemps.filter(item => item);
+             for (i = 0; i < lowTemps.length; i++) {
+                 $("#lowday" + i).text("Low: " + lowTemps[i]);
+             }
             // and again for humidity
             let hums = [];
             for (i = 1; i < 6; i++) {
@@ -147,6 +129,14 @@ function citysearch() {
             for (i = 0; i < iconsURL.length; i++) {
                 $("#icon" + i).attr({ "src": iconsURL[i], "alt": "Daily Weather Icon" });
             }
+            let windspeed2 =[];
+            for (i = 1; i <6; i++) {
+                windspeed2[i] =parseInt(response.daily[i].wind_speed) + "mph";
+            }
+            windspeed2 = windspeed2.filter(item => item);
+            for (i = 0; i < windspeed2.length; i++) {
+                $("#windday" + i).text("Wind: " + windspeed2[i]);
+            }
         });
     });
 }
@@ -154,7 +144,7 @@ function citysearch() {
 $(document).ready(function () {
     // if localStorage is not empty, call fillFromStorage()
     if (localStorage.getItem("cities")) {
-         // grab data, parse and push into searchHistory[], s
+         // grab data, parse and push into searchHistory[] s
          historydisplay = localStorage.getItem("cities", JSON.stringify(historydisplay));
          historydisplay = JSON.parse(historydisplay);
          // iterate through searchHistory, displaying in HTML
@@ -213,4 +203,3 @@ $clear.on("click", function () {
     }
 
 }); 
-

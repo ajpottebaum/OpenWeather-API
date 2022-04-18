@@ -12,23 +12,21 @@
 <!--Body-->
 <body>
     <header class="jumbotron">
-        <h1 class="display-3"> <i class="fas fa-cloud-sun"></i></i> Weather-Dashboard <i
-                class="fas fa-cloud-showers-heavy"></i> </h1>
+        <h1>OpenWeather API Project</h1>
     </header>
 
     <div class="container">
         <div class=" row">
             <!-- City Search sidebar -->
-            <div class="col-sm-3 bg-light container" id="sidebar">
+            <div class="col-sm-3 container" id="sidebar">
                 <!-- search bar -->
                 <h6 id="search-header">Search for a City:</h6>
-                <div class="col-sm-10 input-group">
+                <div class="col-sm-5 input-group">
                     <!-- search input -->
-                    <input class="form-control  " id="cityenter" type="text" placeholder="city name">
+                    <input class="form-control" id="cityenter" type="text" placeholder="city name">
                     <!-- append search button to input -->
                     <div class="input-group-append">
-                        <button class="btn   buttonsearch" type="button">
-                            <i class="fas fa-search"></i></button>
+                        <button class="btn   buttonsearch" type="button">Search</button>
                     </div>
                 </div>
                 <br>
@@ -42,10 +40,6 @@
                             <button id="search3"></button>
                             <button id="search4"></button>
                             <button id="search5"></button>
-                            <button id="search6"></button>
-                            <button id="search7"></button>
-                            <button id="search8"></button>
-                            <button id="search9"></button>
                         </section>
                         <button type="button" class="btn btn-dark shadow-none" id="clearhist">Clear History</button>
                     </ul>
@@ -66,13 +60,16 @@
                             <hr>
                             <h6 class="card-subtitle mb-2 "> Wind Speed : <span id="windspeed"></span></h6>
                             <hr>
-                            <h6 class="card-subtitle mb-2"> UV Index : <span id="uv-index"></span></h6>
+                            <h6 class="card-subtitle mb-2" > UV Index : <span id="uv-index"></span></h6>
+                            <h6 id="Risk1" style="color:green"></h6>
+                            <h6 id="Risk2" style="color:yellow"></h6>
+                            <h6 id="Risk3" style="color:red"></h6>
                         </div>
                     </div>
                     <!-- 5 Day Forecast -->
                     <!-- Dates and weather stats dynamically set -->
                     <div id="five-day">
-                        <h5>5 Days Forecast</h5>
+                        <h5>5 Day Forecast</h5>
                         <div class="row">
                             <div class="col-sm">
                                 <div class="card  five-cards">
@@ -81,6 +78,7 @@
                                     <img class="icons" id="icon0">
                                     <p id="highday0">High:</p>
                                     <p id="lowday0">Low:</p>
+                                    <p id="windday0">Wind:</p>
                                     <p id="humday0">Humidity:</p>
                                 </div>
                             </div>
@@ -90,6 +88,7 @@
                                     <img class="icons" id="icon1">
                                     <p id="highday1">High:</p>
                                     <p id="lowday1">Low:</p>
+                                    <p id="windday1">Wind:</p>
                                     <p id="humday1">Humidity:</p>
                                 </div>
                             </div>
@@ -99,6 +98,7 @@
                                     <img class="icons" id="icon2">
                                     <p id="highday2">High:</p>
                                     <p id="lowday2">Low:</p>
+                                    <p id="windday2">Wind:</p>
                                     <p id="humday2">Humidity:</p>
                                 </div>
                             </div>
@@ -108,6 +108,7 @@
                                     <img class="icons" id="icon3">
                                     <p id="highday3">High:</p>
                                     <p id="lowday3">Low:</p>
+                                    <p id="windday3">Wind:</p>
                                     <p id="humday3">Humidity:</p>
                                 </div>
                             </div>
@@ -117,6 +118,7 @@
                                     <img class="icons" id="icon4">
                                     <p id="highday4">High:</p>
                                     <p id="lowday4">Low:</p>
+                                    <p id="windday4">Wind:</p>
                                     <p id="humday4">Humidity:</p>
                                 </div>
                             </div>
