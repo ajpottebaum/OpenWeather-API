@@ -33,7 +33,7 @@ THEN I am again presented with current and future conditions for that city
 -Live weather and 5 day forecast for 200k+ cities
 
 ## Screenshots
-![Screenshot](/weatherapi.jpeg
+![Screenshot](./weatherapi.jpeg
 
 ## Project Status
 Project is: _incomplete_
